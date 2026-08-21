@@ -11,6 +11,7 @@ function Navbar({ theme, toggleTheme }) {
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Blogs", href: "#blogs" },
     { label: "Contact", href: "#contact" },
   ];
 

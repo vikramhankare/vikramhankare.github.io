@@ -11,7 +11,7 @@ function Contact() {
             <div className="section-container">
 
                 <div className="section-heading">
-                <span>05</span>
+                <span>06</span>
                 <h2>Contact</h2>
                 </div>
 
