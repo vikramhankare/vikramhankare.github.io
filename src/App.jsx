@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { blogs } from "./data/blogs";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import ScrollProgress from "./components/ScrollProgress";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -102,6 +103,9 @@ function App() {
 
   return (
     <>
+
+      <ScrollProgress />
+      
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <main>

@@ -7,6 +7,8 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 
 import { getVisitorId, getVisitorName } from "../utils/visitor";
+import ScrollProgress from "./ScrollProgress";
+import Footer from "./Footer";
 
 const blogFiles = import.meta.glob(
   "../data/blogs/*.md",
@@ -115,6 +117,9 @@ function BlogPage({ blog, onBack }) {
     };
 
   return (
+    <>
+    <ScrollProgress />
+
     <main className="blog-page">
 
       <div className="blog-page-container">
@@ -165,172 +170,9 @@ function BlogPage({ blog, onBack }) {
         </article>
 
         {/* Article actions */}
-        <div className="blog-article-actions">
+          <div className="blog-article-actions">
 
-          <section className="blog-comments">
-
-            <h2>Comments</h2>
-
-            <div className="comment-form">
-              <textarea
-                value={commentText}
-                onChange={(event) => setCommentText(event.target.value)}
-                placeholder="Write a comment..."
-                rows={4}
-              />
-
-              <button
-                  className="blog-action-button"
-                  disabled={!commentText.trim()}
-                  onClick={async () => {
-                    try {
-                      const response = await fetch(
-                        `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions`,
-                        {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            blogSlug: blog.slug,
-                            type: "COMMENT",
-                            anonymousName: visitorName,
-                            content: commentText.trim(),
-                            visitorId,
-                          }),
-                        }
-                      );
-
-                      if (!response.ok) {
-                        throw new Error("Failed to post comment");
-                      }
-
-                      const newComment = await response.json();
-
-                      setComments((previous) => [
-                        ...previous,
-                        {
-                          id: newComment.id,
-                          anonymousName: newComment.anonymousName,
-                          content: newComment.content,
-                          createdAt: newComment.createdAt,
-                          likeCount: 0,
-                        },
-                      ]);
-
-                      setCommentText("");
-                    } catch (error) {
-                      console.error("Comment failed:", error);
-                    }
-                  }}
-                >
-                  Post comment
-                </button>
-            </div>
-
-            <div className="comments-list">
-
-              {comments.map((comment) => (
-                <article
-                  className="comment-card"
-                  key={comment.id}
-                >
-                  <div className="comment-header">
-                    <strong>{comment.anonymousName}</strong>
-
-                    <span>
-                      {new Date(comment.createdAt).toLocaleString()}
-                    </span>
-                  </div>
-
-                  <p>{comment.content}</p>
-
-                  <button
-  className={`blog-action-button ${
-    comment.visitorHasLiked ? "liked" : ""
-  }`}
-  onClick={async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions/comment/${comment.id}/like`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            blogSlug: blog.slug,
-            visitorId,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to like comment");
-      }
-
-      setComments((previous) =>
-        previous.map((item) =>
-          item.id === comment.id
-            ? {
-                ...item,
-                likeCount: item.visitorHasLiked
-                  ? item.likeCount
-                  : item.likeCount + 1,
-                visitorHasLiked: true,
-              }
-            : item
-        )
-      );
-    } catch (error) {
-      console.error("Comment like failed:", error);
-    }
-  }}
->
-  <Heart
-    size={18}
-    fill={comment.visitorHasLiked ? "currentColor" : "none"}
-  />
-  {comment.likeCount}
-</button>
-
-
-{comment.visitorId === visitorId && (
-  <button
-    className="blog-action-button"
-    onClick={async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions/${comment.id}?visitorId=${visitorId}`,
-          {
-            method: "DELETE",
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to delete comment");
-        }
-
-        setComments((previous) =>
-          previous.filter((item) => item.id !== comment.id)
-        );
-      } catch (error) {
-        console.error("Comment deletion failed:", error);
-      }
-    }}
-    aria-label="Delete comment"
-  >
-    🗑️
-  </button>
-)}
-                </article>
-              ))}
-
-            </div>
-
-          </section>
-
-          <button
+            <button
               className={`blog-action-button ${liked ? "liked" : ""}`}
               onClick={async () => {
                 try {
@@ -384,27 +226,233 @@ function BlogPage({ blog, onBack }) {
               {likeCount}
             </button>
 
-          <button
-            className="blog-action-button"
-            onClick={handleShare}
-          >
-            <Share2 size={18} />
-            Share
-          </button>
+            <button
+              className="blog-action-button"
+              onClick={handleShare}
+            >
+              <Share2 size={18} />
+              Share
+            </button>
 
-          <button
-            className="blog-action-button"
-            onClick={handleScrollToTop}
-          >
-            <ArrowUp size={18} />
-            Top
-          </button>
+            <button
+              className="blog-action-button"
+              onClick={handleScrollToTop}
+            >
+              <ArrowUp size={18} />
+              Top
+            </button>
 
-        </div>
+          </div>
 
+
+          {/* Comments */}
+          <section className="blog-comments">
+
+            <h2>Comments</h2>
+
+            <div className="comment-form">
+
+              <input
+                type="text"
+                value={commentText}
+                onChange={(event) => setCommentText(event.target.value)}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      event.currentTarget.nextElementSibling?.click();
+                    }
+                  }}
+                placeholder="Add a comment..."
+                aria-label="Add a comment"
+              />
+
+              <button
+                className="blog-action-button"
+                disabled={!commentText.trim()}
+                onClick={async () => {
+                  try {
+                    const response = await fetch(
+                      `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          blogSlug: blog.slug,
+                          type: "COMMENT",
+                          anonymousName: visitorName,
+                          content: commentText.trim(),
+                          visitorId,
+                        }),
+                      }
+                    );
+
+                    if (!response.ok) {
+                      throw new Error("Failed to post comment");
+                    }
+
+                    const newComment = await response.json();
+
+                    setComments((previous) => [
+                      ...previous,
+                      {
+                        id: newComment.id,
+                        anonymousName: newComment.anonymousName,
+                        content: newComment.content,
+                        createdAt: newComment.createdAt,
+                        likeCount: 0,
+                        visitorHasLiked: false,
+                        visitorId,
+                      },
+                    ]);
+
+                    setCommentText("");
+
+                  } catch (error) {
+                    console.error("Comment failed:", error);
+                  }
+                }}
+              >
+                Post
+              </button>
+
+            </div>
+
+
+            <div className="comments-list">
+
+              {comments.map((comment) => (
+
+                <article
+                  className="comment-card"
+                  key={comment.id}
+                >
+
+                  <div className="comment-content">
+
+                    <div className="comment-header">
+                      <strong>{comment.anonymousName}</strong>
+
+                      <span>
+                        {new Date(comment.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+
+                    <p>{comment.content}</p>
+
+                  </div>
+
+
+                  <div className="comment-actions">
+
+                    <button
+                      className={`blog-action-button ${
+                        comment.visitorHasLiked ? "liked" : ""
+                      }`}
+                      onClick={async () => {
+                        try {
+                          const response = await fetch(
+                            `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions/comment/${comment.id}/like`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                blogSlug: blog.slug,
+                                visitorId,
+                              }),
+                            }
+                          );
+
+                          if (!response.ok) {
+                            throw new Error("Failed to like comment");
+                          }
+
+                          setComments((previous) =>
+                            previous.map((item) =>
+                              item.id === comment.id
+                                ? {
+                                    ...item,
+                                    likeCount: item.visitorHasLiked
+                                      ? item.likeCount
+                                      : item.likeCount + 1,
+                                    visitorHasLiked: true,
+                                  }
+                                : item
+                            )
+                          );
+
+                        } catch (error) {
+                          console.error("Comment like failed:", error);
+                        }
+                      }}
+                      aria-label="Like comment"
+                    >
+                      <Heart
+                        size={18}
+                        fill={
+                          comment.visitorHasLiked
+                            ? "currentColor"
+                            : "none"
+                        }
+                      />
+                      {comment.likeCount}
+                    </button>
+
+
+                    {comment.visitorId === visitorId && (
+                      <button
+                        className="blog-action-button"
+                        onClick={async () => {
+                          try {
+                            const response = await fetch(
+                              `${import.meta.env.VITE_API_BASE_URL}/api/blog/interactions/${comment.id}?visitorId=${visitorId}`,
+                              {
+                                method: "DELETE",
+                              }
+                            );
+
+                            if (!response.ok) {
+                              throw new Error("Failed to delete comment");
+                            }
+
+                            setComments((previous) =>
+                              previous.filter(
+                                (item) => item.id !== comment.id
+                              )
+                            );
+
+                          } catch (error) {
+                            console.error(
+                              "Comment deletion failed:",
+                              error
+                            );
+                          }
+                        }}
+                        aria-label="Delete comment"
+                      >
+                        🗑️
+                      </button>
+                    )}
+
+                  </div>
+
+                </article>
+
+              ))}
+
+            </div>
+
+          </section>
+
+
+          {/* Blog footer */}
+          <Footer />
       </div>
-
     </main>
+    </>
   );
 }
 
