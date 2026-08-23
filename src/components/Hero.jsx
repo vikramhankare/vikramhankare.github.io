@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { profile } from "../data/profile";
+import CodeBlock from "./CodeBlock";
 
 function Hero() {
   return (
@@ -17,7 +19,7 @@ function Hero() {
             transition={{ duration: 0.6 }}
           >
             <span></span>
-            Backend Engineer
+            {profile.role}
           </motion.div>
 
           <motion.h1
@@ -30,7 +32,7 @@ function Hero() {
           >
             Hi, I'm
             <br />
-            <span>Vikram Hankare</span>
+            <span>{profile.name}</span>
           </motion.h1>
 
           <motion.p
@@ -42,8 +44,7 @@ function Hero() {
               delay: 0.25,
             }}
           >
-            I build scalable backend systems and
-            production-ready applications.
+            {profile.tagline}
           </motion.p>
 
           <motion.div
@@ -55,12 +56,15 @@ function Hero() {
               delay: 0.4,
             }}
           >
+
             <a
-              href="#projects"
-              className="btn btn-primary"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              aria-label="LinkedIn"
             >
-              View Projects
-              <ArrowUpRight size={18} />
+              <FaLinkedinIn size={18} />
             </a>
 
             <a
@@ -68,9 +72,19 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
+              aria-label="GitHub"
             >
               <FaGithub size={18} />
-              GitHub
+            </a>
+
+            <a
+              href={profile.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              aria-label="LeetCode"
+            >
+              <SiLeetcode size={18} />
             </a>
           </motion.div>
 
@@ -108,58 +122,16 @@ function Hero() {
 
           <div className="hero-card">
 
-            <div className="hero-card-top">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <div className="hero-code">
-
-              <p>
-                <span className="code-purple">
-                  const
-                </span>{" "}
-                <span className="code-blue">
-                  developer
-                </span>{" "}
-                = {"{"}
-              </p>
-
-              <p className="code-indent">
-                name:{" "}
-                <span className="code-green">
-                  "Vikram"
-                </span>
-                ,
-              </p>
-
-              <p className="code-indent">
-                role:{" "}
-                <span className="code-green">
-                  "Backend Engineer"
-                </span>
-                ,
-              </p>
-
-              <p className="code-indent">
-                stack:{" "}
-                <span className="code-green">
-                  "Java + Spring Boot"
-                </span>
-                ,
-              </p>
-
-              <p className="code-indent">
-                passion:{" "}
-                <span className="code-green">
-                  "Building"
-                </span>
-              </p>
-
-              <p>{"}"}</p>
-
-            </div>
+            <CodeBlock
+                filename="developer.js"
+                language="javascript"
+                code={`const developer = {
+                name: "${profile.name}",
+                role: "${profile.role}",
+                stack: "Java + Spring Boot",
+                passion: "Building"
+              };`}
+              />
 
           </div>
 

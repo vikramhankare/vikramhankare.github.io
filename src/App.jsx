@@ -8,12 +8,29 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Education from "./components/Education";
 import Blogs from "./components/Blogs";
 import BlogPage from "./components/BlogPage";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
+  const backgroundVideos = [
+    "dark-waves.mp4",
+    "old-film.mp4",
+    "paper.mp4",
+    "saturn.mp4",
+    "squares.mp4",
+    "wiggle.mp4",
+  ];
+
+  const [backgroundVideo] = useState(
+    () =>
+      backgroundVideos[
+        Math.floor(Math.random() * backgroundVideos.length)
+      ]
+  );
+
   const getBlogFromUrl = () => {
     const path = window.location.hash;
 
@@ -104,21 +121,35 @@ function App() {
   return (
     <>
 
+      <div className="video-background">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={`/videos/${backgroundVideo}`} type="video/mp4" />
+        </video>
+      </div>
+      
       <ScrollProgress />
       
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Blogs />
-        <Contact />
-      </main>
+      <div className="portfolio-surface">
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Education />
+          <Projects />
+          <Blogs />
+          <Contact />
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }

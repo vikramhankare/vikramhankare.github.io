@@ -2,6 +2,8 @@ export const profile = {
   name: "Vikram Hankare",
   shortName: "VH",
 
+  logo: "/assets/logo.gif",
+
   role: "Backend Engineer",
 
   tagline:

@@ -27,7 +27,7 @@ Here is a sample image from this article.
 
 ## A simple example
 
-```java
+```java title="UserService.java"
 @Cacheable("users")
 public User getUser(Long id) {
     return userRepository.findById(id)

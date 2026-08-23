@@ -10,6 +10,7 @@ function Navbar({ theme, toggleTheme }) {
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
+    { label: "Education", href: "#education" },
     { label: "Projects", href: "#projects" },
     { label: "Blogs", href: "#blogs" },
     { label: "Contact", href: "#contact" },
@@ -29,7 +30,10 @@ function Navbar({ theme, toggleTheme }) {
           className="navbar-logo"
           onClick={handleNavClick}
         >
-          {profile.shortName}
+          <img
+            src={profile.logo}
+            alt="Home"
+          />
         </a>
 
         {/* Navigation */}
@@ -61,7 +65,7 @@ function Navbar({ theme, toggleTheme }) {
           </a>
 
           {/* Mobile theme */}
-          <button
+          {/* <button
             className="mobile-theme-button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
@@ -77,23 +81,13 @@ function Navbar({ theme, toggleTheme }) {
                 ? "Light mode"
                 : "Dark mode"}
             </span>
-          </button>
+          </button> */}
         </nav>
 
         {/* Desktop controls */}
         <div className="desktop-controls">
 
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="navbar-github"
-            aria-label="GitHub"
-          >
-            <FaGithub size={19} />
-          </a>
-
-          <button
+          {/* <button
             className="theme-toggle"
             onClick={toggleTheme}
             aria-label="Toggle theme"
@@ -103,14 +97,14 @@ function Navbar({ theme, toggleTheme }) {
             ) : (
               <Moon size={18} />
             )}
-          </button>
+          </button> */}
 
         </div>
 
         {/* Mobile controls */}
         <div className="mobile-controls">
 
-          <button
+          {/* <button
             className="theme-toggle"
             onClick={toggleTheme}
             aria-label="Toggle theme"
@@ -120,7 +114,7 @@ function Navbar({ theme, toggleTheme }) {
             ) : (
               <Moon size={18} />
             )}
-          </button>
+          </button> */}
 
           <button
             className="mobile-menu-button"

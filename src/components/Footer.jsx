@@ -21,7 +21,10 @@ function Footer() {
             href="#home"
             className="footer-logo"
           >
-            VH
+            <img
+              src={profile.logo}
+              alt="Home"
+            />
           </a>
 
           <div className="footer-links">
@@ -57,11 +60,11 @@ function Footer() {
 
         <div className="footer-bottom">
           <span>
-            © 2026 Vikram Hankare
+            © 2026 {profile.name}
           </span>
 
           <span>
-            Built with React
+            Built with ♥ using React + AI-assisted development
           </span>
         </div>
 

@@ -37,7 +37,7 @@ function Projects() {
           {/* Section heading */}
           <div className="section-heading">
             <span>04</span>
-            <h2>Projects</h2>
+            <h1>Projects</h1>
           </div>
 
           <p className="projects-intro">

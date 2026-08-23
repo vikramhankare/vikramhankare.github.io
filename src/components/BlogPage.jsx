@@ -3,12 +3,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useState } from "react";
 
-import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github-dark.css";
-
 import { getVisitorId, getVisitorName } from "../utils/visitor";
 import ScrollProgress from "./ScrollProgress";
 import Footer from "./Footer";
+
+import CodeBlock from "./CodeBlock";
 
 const blogFiles = import.meta.glob(
   "../data/blogs/*.md",
@@ -154,15 +153,46 @@ function BlogPage({ blog, onBack }) {
         <article className="blog-article-content">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight]}
                 components={{
-                    img: ({ src, alt, ...props }) => (
+                  img: ({ src, alt, ...props }) => (
                     <img
-                        src={resolveBlogAsset(src)}
-                        alt={alt || ""}
-                        {...props}
+                      src={resolveBlogAsset(src)}
+                      alt={alt || ""}
+                      {...props}
                     />
-                    ),
+                  ),
+
+                  code: ({ node, inline, className, children, ...props }) => {
+                    if (inline) {
+                      return (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    }
+
+                    const language =
+                      className?.replace("language-", "") || "javascript";
+
+                    const meta = node?.data?.meta || node?.meta || "";
+
+                    const filenameMatch = meta.match(
+                      /(?:title|file|filename)=["']([^"']+)["']/
+                    );
+
+                    const filename =
+                      filenameMatch?.[1] || "code";
+
+                    const code = String(children).replace(/\n$/, "");
+
+                    return (
+                      <CodeBlock
+                        code={code}
+                        language={language}
+                        filename={filename}
+                      />
+                    );
+                  },
                 }}
                 >
                 {markdown || "Article content is unavailable."}

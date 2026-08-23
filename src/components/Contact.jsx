@@ -12,7 +12,7 @@ function Contact() {
 
                 <div className="section-heading">
                 <span>06</span>
-                <h2>Contact</h2>
+                <h1>Contact</h1>
                 </div>
 
                 <div className="contact-content">
@@ -37,7 +37,7 @@ function Contact() {
                     <Mail size={20} />
 
                     <span>
-                        your.email@example.com
+                        {profile.email.replace("mailto:", "")}
                     </span>
 
                     <ArrowUpRight size={18} />
@@ -47,6 +47,7 @@ function Contact() {
 
                     <a
                         href={profile.github}
+                        className="contact-GitHub"
                         target="_blank"
                         rel="noreferrer"
                         aria-label="GitHub"
@@ -57,6 +58,7 @@ function Contact() {
 
                     <a
                         href={profile.linkedin}
+                        className="contact-LinkedIn"
                         target="_blank"
                         rel="noreferrer"
                         aria-label="LinkedIn"
