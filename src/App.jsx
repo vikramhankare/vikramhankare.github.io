@@ -16,11 +16,13 @@ import Footer from "./components/Footer";
 
 function App() {
   const backgroundVideos = [
-    "dark-waves.mp4",
+    "dark-liquid.mp4",
+    "dots.mp4",
     "old-film.mp4",
     "paper.mp4",
     "saturn.mp4",
     "squares.mp4",
+    "small-squares.mp4",
     "wiggle.mp4",
   ];
 
