@@ -35,31 +35,23 @@ function Education() {
                 <div className="education-content">
                   <div className="education-header">
                     <div className="education-main">
-                        <h3>{item.degree}</h3>
+                        <h3>{item.institution}</h3>
 
                         <div className="education-institution">
-                        {item.institution}
+                          {item.degree}
                         </div>
 
                         <div className="education-location">
-                        {item.location}
+                          {item.location}
                         </div>
+                      </div>
+
+                      <div className="education-cgpa">
+                        {item.scoreLabel}: {item.score}
+                      </div>
                     </div>
 
-                    <div className="education-cgpa">
-                        CGPA: {item.cgpa}/10.0
-                    </div>
-                    </div>
-
-                  <p className="education-description">
-                    {item.description}
-                  </p>
-
-                  <div className="education-highlights">
-                    {item.highlights.map((highlight) => (
-                      <span key={highlight}>{highlight}</span>
-                    ))}
-                  </div>
+    
                 </div>
               </motion.article>
             ))}

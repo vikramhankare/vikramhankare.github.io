@@ -1,63 +1,32 @@
 export const experiences = [
   {
-    period: "2025 — Present",
-    role: "Backend Engineer",
-    company: "Company Name",
-    location: "India · Remote",
+    period: "Aug 2023 — Sept 2024",
+    role: "Software Developer 2",
+    company: "Dell Technologies",
+    location: "Bengaluru",
     description:
-      "Building scalable backend services and production-ready applications using Java, Spring Boot, REST APIs, and relational databases.",
+      "Developed and enhanced secure backend services for Dell's Security & Trust platform, delivering enterprise functionality while improving testing, security, and cross-team integration workflows.",
+
     responsibilities: [
-      "Developed and maintained RESTful APIs using Java and Spring Boot.",
-      "Worked with databases, JPA/Hibernate, and service-layer architecture.",
-      "Designed backend components with scalability, reliability, and maintainability in mind.",
-    ],
+  "Developed and enhanced **20+ secure REST APIs using Java, Spring Boot, and Spring MVC** for Dell’s Security & Trust platform, delivering new functionality while resolving production issues for enterprise applications.",
+
+  "**Increased backend test coverage** by developing **100+ JUnit test cases** and automating **25+ critical API workflows**, reducing manual regression effort and improving release confidence for quarterly deployments.",
+
+  "**Implemented enterprise security features** including **encryption, digital signatures, secure token exchange, and authentication workflows**, strengthening secure communication between distributed backend services.",
+
+  "**Designed and developed a reusable Spring Boot proxy service** that enabled **multiple engineering teams** to independently validate APIs, reducing integration setup time and accelerating cross-team testing.",
+
+  "Served as the team’s **Security Champion and Scrum Master**, leading quarterly security assessments, sprint ceremonies, peer code reviews, and secure development initiatives across the Security & Trust organization.",
+],
+
     technologies: [
       "Java",
       "Spring Boot",
       "REST APIs",
+      "Spring MVC",
       "JPA",
-      "PostgreSQL",
-    ],
-  },
-
-  {
-    period: "2024 — 2025",
-    role: "Software Engineer",
-    company: "Previous Company",
-    location: "India · Hybrid",
-    description:
-      "Worked on backend application development and contributed to building reliable software components.",
-    responsibilities: [
-      "Implemented backend features and business logic.",
-      "Worked with APIs, databases, testing, and debugging.",
-      "Collaborated with team members to deliver production-ready features.",
-    ],
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "MySQL",
-      "Git",
       "JUnit",
-    ],
-  },
-
-  {
-    period: "2023 — 2024",
-    role: "Software Engineering Intern",
-    company: "Company / Organization",
-    location: "India",
-    description:
-      "Gained practical software engineering experience while working on application development and problem solving.",
-    responsibilities: [
-      "Worked on application features and internal tools.",
-      "Practiced clean coding and software development fundamentals.",
-      "Collaborated with developers while learning production workflows.",
-    ],
-    technologies: [
-      "Java",
-      "Spring",
-      "SQL",
-      "Git",
+      "Security",
     ],
   },
 ];

@@ -1,73 +1,64 @@
 export const projects = [
   {
     number: "01",
-    title: "Product Catalog Service",
-    description:
-      "A backend service for managing products, categories, and catalog operations through RESTful APIs.",
+    title: "Optimized Document Clustering - Mtech",
 
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "Spring Data JPA",
-      "PostgreSQL",
-      "Docker",
+    description: [
+      "Designed and implemented a **novel document clustering framework combining Modified K-Means with Multi-objective Black Hole Optimization (DC-MOHBHO)** to improve clustering quality for high-dimensional text datasets.",
+
+      "Built a complete **NLP preprocessing pipeline** incorporating **tokenization, stop-word removal, TF-IDF vectorization, and PCA-based dimensionality reduction** to generate optimized feature representations.",
+
+      "Enhanced the traditional K-Means algorithm using **MaxMin centroid initialization, cosine similarity**, and adaptive cluster selection based on the average of the **Elbow Method and Silhouette Score**.",
+
+      "Formulated a **multi-objective fitness function** that simultaneously optimized **Purity Index and Silhouette Score**, enabling the **Black Hole Optimization** algorithm to search for high-quality clustering solutions.",
+
+      "Evaluated the proposed model on **five benchmark datasets including News20, Reuters, Doc50, Iris, and Wine**, demonstrating consistent improvements over conventional K-Means and multiple metaheuristic clustering approaches.",
+
+      "Achieved **superior clustering performance** across benchmark datasets by outperforming **K-Means++, PSO, GA, and Firefly-based** clustering techniques in both external (**Purity**) and internal (**Silhouette**) evaluation metrics.",
     ],
 
-    github: "https://github.com/vikramhankare/ProductCatalogService",
+    technologies: [
+      "Python",
+      "NLP",
+      "TF-IDF",
+      "PCA",
+      "K-Means",
+      "Black Hole Optimization",
+      "NumPy",
+      "Scikit-learn",
+    ],
+
+    github: null,
     live: null,
   },
 
   {
     number: "02",
-    title: "User Authentication Service",
-    description:
-      "A secure authentication service providing user registration, login, authorization, and token-based security.",
+    title: "CommerceSphere - Backend",
 
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "Spring Security",
-      "JWT",
-      "PostgreSQL",
+    description: [
+      "Architected and developed a **scalable microservices-based E-Commerce platform** with **secure authentication, authorization, product catalog, payment gateway integration, service discovery, and notification services**.",
+
+      "Deployed and managed the platform on **AWS Elastic Beanstalk**, integrating **Amazon RDS** for reliable data persistence and **CloudWatch** for application logging and performance monitoring.",
+
+      "Engineered an **event-driven email notification service using Apache Kafka**, enabling asynchronous communication and improving scalability across distributed services.",
+
+      "Reduced API response latency from approximately **500 ms to 20 ms** by implementing **Redis-based caching** for high-frequency static data, significantly improving application performance.",
     ],
 
-    github: "https://github.com/vikramhankare/UserAuthService",
-    live: null,
-  },
-
-  {
-    number: "03",
-    title: "Payment Service",
-    description:
-      "A backend payment service designed to handle payment workflows, transaction processing, and service integration.",
-
     technologies: [
-      "Java",
       "Spring Boot",
-      "REST APIs",
-      "Docker",
-      "Microservices",
+      "MySQL",
+      "AWS",
+      "Spring Cloud",
+      "Hibernate",
+      "Redis",
+      "Razor and Stripe Payment Gateway",
+      "JUnit",
+      "Kafka",
     ],
 
-    github: "https://github.com/vikramhankare/PaymentService",
-    live: null,
-  },
-
-  {
-    number: "04",
-    title: "Notification Service",
-    description:
-      "A notification microservice responsible for processing and delivering application notifications through a scalable service architecture.",
-
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "REST APIs",
-      "Microservices",
-      "Docker",
-    ],
-
-    github: "https://github.com/vikramhankare/NotificationService",
+    github: null,
     live: null,
   },
 ];

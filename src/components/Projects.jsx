@@ -2,28 +2,40 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   ExternalLink,
-  Code2,
-  Network,
 } from "lucide-react";
 
-import { FaGithub, FaJava } from "react-icons/fa";
-import {
-  SiSpringboot,
-  SiSpringsecurity,
-  SiPostgresql,
-  SiDocker,
-  SiMongodb,
-  SiMysql,
-  SiGit,
-  SiLinux,
-  SiHibernate,
-} from "react-icons/si";
+import { FaGithub } from "react-icons/fa";
 
 import Reveal from "./Reveal";
 
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import { technologyIcons } from "../data/technologyIcons";
+
+
+// Converts **text** into bold + red highlighted text
+function renderHighlightedText(text) {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong
+          key={index}
+          style={{
+            color: "#ff1744",
+            fontWeight: 700,
+          }}
+        >
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    return part;
+  });
+}
+
 
 function Projects() {
   return (
@@ -36,7 +48,7 @@ function Projects() {
 
           {/* Section heading */}
           <div className="section-heading">
-            <span>04</span>
+            <span>05</span>
             <h1>Projects</h1>
           </div>
 
@@ -45,6 +57,7 @@ function Projects() {
             applications I've built while exploring
             scalable software architecture.
           </p>
+
 
           {/* Projects */}
           <div className="projects-list">
@@ -76,6 +89,7 @@ function Projects() {
                   {project.number}
                 </div>
 
+
                 {/* Project content */}
                 <div className="project-content">
 
@@ -87,14 +101,16 @@ function Projects() {
 
                     <div className="project-links">
 
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${project.title} GitHub repository`}
-                      >
-                        <FaGithub size={18} />
-                      </a>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} GitHub repository`}
+                        >
+                          <FaGithub size={18} />
+                        </a>
+                      )}
 
                       {project.live && (
                         <a
@@ -111,24 +127,33 @@ function Projects() {
 
                   </div>
 
-                  <p className="project-description">
-                    {project.description}
-                  </p>
 
+                  {/* Project description */}
+                  <ul className="project-description">
+                    {project.description.map((point, pointIndex) => (
+                      <li key={pointIndex}>
+                        {renderHighlightedText(point)}
+                      </li>
+                    ))}
+                  </ul>
+
+
+                  {/* Highlight / keyword pills */}
                   <div className="project-technologies">
                     {project.technologies.map((technology) => {
-                        const Icon = technologyIcons[technology];
+                      const Icon = technologyIcons[technology];
 
-                        return (
+                      return (
                         <span key={technology}>
-                            {Icon && <Icon size={16} />}
-                            {technology}
+                          {Icon && <Icon size={16} />}
+                          {technology}
                         </span>
-                        );
+                      );
                     })}
-                   </div>
+                  </div>
 
                 </div>
+
 
                 {/* Arrow */}
                 <ArrowUpRight
@@ -140,6 +165,7 @@ function Projects() {
             ))}
 
           </div>
+
 
           {/* GitHub CTA */}
           <motion.div
@@ -172,5 +198,6 @@ function Projects() {
     </section>
   );
 }
+
 
 export default Projects;

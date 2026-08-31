@@ -1,32 +1,31 @@
 export const education = [
   {
-    period: "2020 — 2024",
-    degree: "Bachelor's Degree",
-    institution: "University Name",
-    location: "India",
-    cgpa: "8.25",
-    description:
-      "Studied computer science and developed a strong foundation in software engineering, programming, data structures, and computer systems.",
-    highlights: [
-      "Computer Science",
-      "Data Structures & Algorithms",
-      "Database Systems",
-      "Software Engineering",
-    ],
+    period: "2025 — Present",
+    institution: "Scaler",
+    degree: "Academy Program",
+    location: "Online - scaler.com",
+    scoreLabel: "PSP",
+    score: "92%",
   },
+  
   {
-    period: "2024 — 2026",
-    degree: "Master's Degree",
-    institution: "University Name",
-    location: "India",
-    cgpa: "8.25",
-    description:
-      "Advanced studies in computer science with a focus on software development, systems, and applied computing.",
-    highlights: [
-      "Advanced Computer Science",
-      "Software Development",
-      "Computer Systems",
-      "Research",
-    ],
+    period: "2021 — 2023",
+    institution: "National Institute of Technology - Calicut",
+    degree: "M.Tech - Computer Science",
+    location: "Calicut",
+    scoreLabel: "CGPA",
+    score: "8.25/10.0",
   },
+
+  {
+    period: "2015 — 2019",
+    institution:
+      "Vasantdada Patil Pratishthan’s College of Engineering - Mumbai University",
+    degree: "BE - Computer Science",
+    location: "Mumbai",
+    scoreLabel: "CGPA",
+    score: "6.88/10.0",
+  },
+
+  
 ];

@@ -6,6 +6,22 @@ import { technologyIcons } from "../data/technologyIcons";
 import { experiences } from "../data/experience";
 import { profile } from "../data/profile";
 
+function renderRichText(text) {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={index} style={{ color: "#ff1744" }}>
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    return part;
+  });
+}
+
 function Experience() {
   return (
     <section
@@ -79,7 +95,7 @@ function Experience() {
                     {experience.responsibilities.map(
                       (responsibility) => (
                         <li key={responsibility}>
-                          {responsibility}
+                          {renderRichText(responsibility)}
                         </li>
                       )
                     )}
